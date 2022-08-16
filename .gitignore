@@ -1,0 +1,6 @@
+cside/sessions/relis_session*
+relis_app/config/database.php
+relis_app/config/derby.log
+relis_app/libraries/table_config/project/install_config_*
+relis_app/libraries/table_config/project/temp/install_config_*
+workspace/

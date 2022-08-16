@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="bdf26623-d211-4971-943e-31df26661a0e" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/relis_app/config/database.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/relis_app/config/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/relis_app/config/config.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/relis_dev/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/relis_dev/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/relis_dev/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/relis_dev/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/relis_dev/docker/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/relis_dev/docker/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/relis_dev/docker/entrypoint.sh" beforeDir="false" afterPath="$PROJECT_DIR$/relis_dev/docker/entrypoint.sh" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings" notifyAboutMissingVendor="false" synchronizationState="SYNCHRONIZE">
+    <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
+    <execution />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="PhpDebugGeneral" break_at_first_line="true" />
+  <component name="PhpServers">
+    <servers>
+      <server host="localhost" id="55ef46d9-8d88-41f6-9df0-370f9332b227" name="relis" port="9000" />
+      <server host="localhost" id="c6b79838-01c9-44cb-ab09-f4a3c2ba4122" name="localhost" port="8083" use_path_mappings="true">
+        <path_mappings>
+          <mapping local-root="$PROJECT_DIR$" remote-root="/u/relis/public_html" />
+        </path_mappings>
+      </server>
+    </servers>
+  </component>
+  <component name="ProjectId" id="2DSFvzh9BygobDGONHD9vQpnLaO" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RunManager">
+    <configuration name="Relis" type="PhpRemoteDebugRunConfigurationType" factoryName="PHP Remote Debug" filter_connections="FILTER" server_name="relis" session_id="VSCODE">
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="bdf26623-d211-4971-943e-31df26661a0e" name="Changes" comment="" />
+      <created>1660684816983</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1660684816983</updated>
+      <workItem from="1660684828777" duration="8000" />
+      <workItem from="1660684841551" duration="511000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
