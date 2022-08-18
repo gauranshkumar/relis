@@ -3055,11 +3055,14 @@ class Manager extends CI_Controller
 		//print_test($screening_phase_info);
 		//print_test($fieds);
 		$data['screening_phase_info'] = $screening_phase_info;
+		$search_string = $this->DBConnection_mdl->get_row_details('ref_papers_sources', $data['the_paper']);
 		if (!empty($data['the_paper'])) {
 
 			$paper_detail = $this->DBConnection_mdl->get_row_details('papers', $data['the_paper']);
 			$data['paper_title'] = $paper_detail['bibtexKey'] . " - " . $paper_detail['title'];
+			// $this->highlight_search_term($paper_detail['title'], "model");
 
+			// TODO: Change this screen to highlight the string
 			if (in_array('Abstract', $displayed_fieds))
 				$data['paper_abstract'] = $paper_detail['abstract'];
 
@@ -3972,12 +3975,51 @@ class Manager extends CI_Controller
 	}
 
 	// Function to hightlight the searched term in the result
-	private function highlight_search_term($text, $search_term)
+	private function highlight_search_term($text, $search_string)
 	{
-		$text = preg_replace('/(\w*' . $search_term . '\w*)/i', '<span style="background-color: yellow; color: black">\1</span>', $text);
-		return $text;
+		$search_string = str_replace(array('(', ')', 'AND', 'OR', 'NOT'), '', " " . $search_string . " ");
+
+		$terms = preg_match_all('/"[^"]+"|\s?(\w*[^a-zA-Z0-9_ ])+?\s|\s?\w+?\s/i', $search_string, $matches, PREG_SET_ORDER, 0);
+		// print_test($matches);
+		foreach ($matches as $match) {
+			$match = trim($match[0]);
+			if ($match[0] == '"') {
+				if ($match[1] == '*' || $match[strlen($match) - 2] == '*') {
+					$match = str_replace('*', '\w*', $match);
+				}
+				$match = str_replace('"', '\b', $match);
+			} elseif ($match[0] == '*' || $match[strlen($match) - 1] == '*') {
+				$match = str_replace('*', '\w*', $match);
+			} else {
+				$match = '\b' . $match . '\b';
+			}
+			$re = '/(' . $match . ')|(\xFE' . $match . ')/i';
+			// using ASCII 254 in start and 220 at end as a "placeholder" for the hihlight code tag
+			$text = preg_replace_callback($re,  function ($findings) {
+				// "\xFE$1\xDC"
+				if ($findings[0][0] == chr(254)) {
+					return $findings[0];
+				} else {
+					return "\xFE" . $findings[0] . "\xDC";
+				}
+			}, $text);
+		}
+		print_test($text);
+
+		// Hihglihting the search term
+		return preg_replace_callback('/\xFE[a-zA-Z0-9_ ]*\xDC/i', function ($matches) {
+			$matches[0] = trim($matches[0], chr(254));
+			$matches[0] = trim($matches[0], chr(220));
+			$final_str = '<span style="background-color: yellow; color: black">' . $matches[0] . '</span>';
+			return $final_str;
+		}, $text);
 	}
 
+	/* ""software"  "program"  "engineering"  "design*"  "construct*"  "requirement*" 		"architecture"  "test*"  "maintain"  "maintenance"  "configuration management"  "		quality"" */
+
+	/* (("software" OR "program") AND ("engineering" OR "design*" OR "construct*" OR "requirement*" OR
+	"architecture" OR "test*" OR "maintain" OR "maintenance" OR "configuration management" OR "
+	quality")) */
 
 	/*
 	 * Fonction spécialisé  pour l'affichage d'un papier
@@ -4043,6 +4085,10 @@ class Manager extends CI_Controller
 
 
 		$content_item = $this->DBConnection_mdl->get_row_details('get_detail_papers', $ref_id, TRUE);
+
+		// fetching the search query from the `ref_papers_sources` table
+		$search_query = $this->DBConnection_mdl->get_row_details('get_detail_papers_sources', $ref_id, TRUE)['ref_search_query'];
+		print_test($search_query);
 		//get_detail_paper
 		//print_test($content_item);
 
@@ -4055,7 +4101,9 @@ class Manager extends CI_Controller
 		$data['paper_excluded'] = $paper_excluded;
 		$item_data = array();
 
-		$array['title'] = $content_item['bibtexKey'] . " - " . $this->highlight_search_term($content_item['title'], "model");
+
+		$array['title'] = $content_item['bibtexKey'] . " - " .
+			$this->highlight_search_term($content_item['title'], $search_query);
 
 		if (!empty($content_item['doi'])) {
 			$paper_link = $content_item['doi'];
@@ -4076,7 +4124,8 @@ class Manager extends CI_Controller
 
 		array_push($item_data, $array);
 
-		$array['title'] = "<b>" . lng('Abstract') . " :</b> <br/><br/>" . $this->highlight_search_term($content_item['abstract'], "model");
+		$array['title'] = "<b>" . lng('Abstract') . " :</b> <br/><br/>" . $content_item['abstract'];
+		// $this->highlight_search_term($content_item['abstract'], "model");
 		array_push($item_data, $array);
 		$array['title'] = "<b>" . lng('Preview') . " :</b> <br/><br/>" . $content_item['preview'];
 		array_push($item_data, $array);
